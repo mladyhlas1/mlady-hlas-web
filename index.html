@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mladý HLAS – mládežnícka organizácia strany HLAS – sociálna demokracia. Mladí, hlasní a bez filtra.">
+    <title>Mladý HLAS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ── RESET & BASE ─────────────────────────────── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --red:        #CC1A25;
+            --red-dark:   #A5141D;
+            --red-light:  #E53935;
+            --dark:       #1A1A1A;
+            --dark-2:     #2D2D2D;
+            --gray:       #666666;
+            --light-gray: #F5F5F5;
+            --white:      #FFFFFF;
+            --ease:       0.3s ease;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-weight: 800; line-height: 1.1; }
+        p { line-height: 1.7; color: var(--gray); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        .section-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 14px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        /* ── NAVIGATION ───────────────────────────────── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 200;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.07);
+            transition: box-shadow var(--ease);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo img { height: 38px; width: auto; display: block; }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: var(--dark);
+            transition: color var(--ease);
+        }
+
+        .nav-links a:hover { color: var(--red); }
+
+        .nav-cta {
+            background: var(--red) !important;
+            color: #fff !important;
+            padding: 10px 22px;
+            border-radius: 4px;
+        }
+
+        .nav-cta:hover { background: var(--red-dark) !important; }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--dark);
+            border-radius: 2px;
+            transition: var(--ease);
+        }
+
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* Mobile nav */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 70px; left: 0; right: 0;
+            background: white;
+            padding: 8px 24px 24px;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            z-index: 199;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+        }
+
+        .mobile-nav.open { display: block; }
+
+        .mobile-nav a {
+            display: block;
+            padding: 15px 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--dark);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            transition: color var(--ease);
+        }
+
+        .mobile-nav a:hover { color: var(--red); }
+        .mobile-nav a.accent { color: var(--red); border-bottom: none; }
+
+        /* ── HERO ─────────────────────────────────────── */
+        #hero {
+            min-height: 100vh;
+            background: var(--dark);
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: -12px;
+            background-image: url('images/hero.jpg');
+            background-size: cover;
+            background-position: center 30%;
+            opacity: 0.32;
+            filter: blur(6px);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(204,26,37,0.25) 0%, transparent 60%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 130px 24px 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 100px;
+            padding: 8px 18px 8px 8px;
+            margin-bottom: 32px;
+        }
+
+        .hero-badge-dot {
+            width: 8px; height: 8px;
+            background: var(--red-light);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.3); }
+        }
+
+        .hero-badge span {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.85);
+        }
+
+        #hero h1 {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            color: white;
+            line-height: 1.0;
+            margin-bottom: 28px;
+            font-weight: 900;
+            max-width: 780px;
+        }
+
+        #hero h1 em {
+            font-style: normal;
+            color: var(--red-light);
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 540px;
+            margin-bottom: 44px;
+            line-height: 1.75;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: all var(--ease);
+            border: 2px solid transparent;
+        }
+
+        .btn-red {
+            background: var(--red);
+            color: white;
+            border-color: var(--red);
+        }
+
+        .btn-red:hover { background: var(--red-dark); border-color: var(--red-dark); }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border-color: rgba(255,255,255,0.35);
+        }
+
+        .btn-outline:hover { border-color: rgba(255,255,255,0.8); }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-scroll-line {
+            width: 1px;
+            height: 56px;
+            background: rgba(255,255,255,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-scroll-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(to bottom, transparent, var(--red-light));
+            animation: scroll-drip 2s ease-in-out infinite;
+        }
+
+        @keyframes scroll-drip {
+            0% { top: -60%; }
+            100% { top: 120%; }
+        }
+
+        .hero-scroll-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+        }
+
+        /* ── ABOUT ────────────────────────────────────── */
+        #o-nas { padding: 110px 0; }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image-wrap {
+            position: relative;
+        }
+
+        .about-image-wrap img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .about-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--red);
+            color: white;
+            padding: 20px 26px;
+            border-radius: 4px;
+            box-shadow: 0 8px 32px rgba(204,26,37,0.35);
+        }
+
+        .about-badge .big { font-size: 2.2rem; font-weight: 900; line-height: 1; }
+        .about-badge .small { font-size: 11px; font-weight: 600; letter-spacing: 1px; margin-top: 4px; opacity: 0.9; }
+
+        .about-text { padding-left: 8px; }
+
+        .about-text p { margin-bottom: 18px; font-size: 1rem; }
+        .about-text p:last-of-type { margin-bottom: 0; }
+
+        .pullquote {
+            border-left: 3px solid var(--red);
+            padding: 18px 22px;
+            background: var(--light-gray);
+            border-radius: 0 4px 4px 0;
+            margin: 28px 0;
+        }
+
+        .pullquote p {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark);
+            font-style: italic;
+            line-height: 1.55;
+        }
+
+        /* ── PHOTO CAROUSEL ───────────────────────────── */
+        .carousel-wrap {
+            height: 260px;
+            background: var(--dark);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-wrap::before,
+        .carousel-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 80px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .carousel-wrap::before { left: 0;  background: linear-gradient(to right, var(--dark), transparent); }
+        .carousel-wrap::after  { right: 0; background: linear-gradient(to left,  var(--dark), transparent); }
+
+        .carousel-track {
+            display: flex;
+            gap: 8px;
+            width: max-content;
+            height: 100%;
+            animation: carousel-scroll 100s linear infinite;
+        }
+
+        .carousel-wrap:hover .carousel-track {
+            animation-play-state: paused;
+        }
+
+        .carousel-track img {
+            height: 100%;
+            width: auto;
+            object-fit: cover;
+            flex-shrink: 0;
+            filter: grayscale(15%) brightness(0.88);
+            transition: filter 0.4s, transform 0.4s;
+            cursor: pointer;
+        }
+
+        .carousel-track img:hover {
+            filter: grayscale(0%) brightness(1.05);
+            transform: scale(1.03);
+        }
+
+        @keyframes carousel-scroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .carousel-track { animation: none; }
+        }
+
+        /* ── VALUES ───────────────────────────────────── */
+        #hodnoty {
+            padding: 110px 0;
+            background: var(--light-gray);
+        }
+
+        .values-intro {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .values-intro p {
+            max-width: 560px;
+            margin: 0 auto;
+            font-size: 0.95rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+        }
+
+        .value-card {
+            background: white;
+            border-radius: 4px;
+            padding: 26px 20px 44px;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.25s, box-shadow 0.25s, background 0.25s, border-color 0.25s;
+            border: 2px solid transparent;
+            min-height: 160px;
+        }
+
+        .value-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+            border-color: var(--red);
+        }
+
+        .value-card.open {
+            background: var(--red);
+            border-color: var(--red);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 32px rgba(204,26,37,0.3);
+        }
+
+        .v-num {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            color: var(--red);
+            margin-bottom: 10px;
+            transition: color 0.25s;
+        }
+
+        .value-card.open .v-num { color: rgba(255,255,255,0.6); }
+
+        .v-title {
+            font-size: 12.5px;
+            font-weight: 800;
+            line-height: 1.35;
+            color: var(--dark);
+            margin-bottom: 8px;
+            transition: color 0.25s;
+        }
+
+        .value-card.open .v-title { color: white; }
+
+        .v-short {
+            font-size: 11.5px;
+            color: var(--gray);
+            line-height: 1.55;
+            transition: color 0.25s;
+        }
+
+        .value-card.open .v-short { color: rgba(255,255,255,0.75); }
+
+        .v-expand {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.35s ease;
+        }
+
+        .v-expand.open { max-height: 220px; }
+
+        .v-expand p {
+            font-size: 12px;
+            color: rgba(255,255,255,0.88);
+            padding-top: 12px;
+            line-height: 1.65;
+        }
+
+        .v-plus {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            width: 18px;
+            height: 18px;
+        }
+
+        .v-plus::before, .v-plus::after {
+            content: '';
+            position: absolute;
+            background: var(--gray);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.25s;
+        }
+
+        .v-plus::before { width: 12px; height: 1.5px; }
+        .v-plus::after { width: 1.5px; height: 12px; }
+
+        .value-card.open .v-plus::before { background: rgba(255,255,255,0.6); }
+        .value-card.open .v-plus::after { background: rgba(255,255,255,0.6); transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+        .value-card:hover .v-plus::before, .value-card:hover .v-plus::after { background: var(--red); }
+        .value-card.open:hover .v-plus::before, .value-card.open:hover .v-plus::after { background: rgba(255,255,255,0.6); }
+
+        /* ── QUOTE BAND ───────────────────────────────── */
+        .quote-band {
+            background: var(--red);
+            padding: 80px 24px;
+            text-align: center;
+        }
+
+        .quote-band blockquote {
+            max-width: 840px;
+            margin: 0 auto;
+            font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+            font-weight: 900;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .quote-band blockquote em {
+            font-style: normal;
+            color: rgba(255,255,255,0.55);
+        }
+
+        /* ── GOALS ────────────────────────────────────── */
+        #ciele { padding: 110px 0; }
+
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-top: 56px;
+        }
+
+        .goal-card {
+            padding: 40px 32px;
+            border-radius: 4px;
+            background: var(--light-gray);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .goal-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--red);
+        }
+
+        .goal-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+        }
+
+        .goal-icon {
+            width: 52px; height: 52px;
+            background: var(--red);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 22px;
+        }
+
+        .goal-icon svg {
+            width: 26px; height: 26px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .goal-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 14px;
+        }
+
+        .goal-card p { font-size: 0.92rem; }
+
+        /* ── TEAM ─────────────────────────────────────── */
+        #tim {
+            padding: 110px 0;
+            background: var(--light-gray);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 22px;
+            margin-top: 56px;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+        }
+
+        .team-card.lead .team-role {
+            color: var(--red);
+            font-weight: 700;
+        }
+
+        .team-photo {
+            aspect-ratio: 3/4;
+            background: #ece8e8;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            transition: transform 0.4s;
+        }
+
+        .team-card:hover .team-photo img {
+            transform: scale(1.04);
+        }
+
+        .team-photo svg {
+            width: 52px; height: 52px;
+            stroke: #c8c0c0;
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+        }
+
+        .team-photo span {
+            font-size: 11px;
+            font-weight: 600;
+            color: #bbb;
+            letter-spacing: 1px;
+        }
+
+        .team-info { padding: 18px 20px; }
+
+        .team-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .team-role {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--red);
+            letter-spacing: 0.5px;
+        }
+
+        /* ── GALLERY SLIDESHOW ────────────────────────── */
+        #nase-aktivity { padding: 110px 0; }
+
+        .slideshow-wrap {
+            position: relative;
+            margin-top: 48px;
+            width: 100%;
+            height: 580px;
+            overflow: hidden;
+            border-radius: 6px;
+            background: var(--dark);
+        }
+
+        .slideshow-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .slideshow-slide {
+            min-width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .slideshow-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slideshow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(4px);
+            transition: background 0.2s;
+            z-index: 10;
+        }
+        .slideshow-btn:hover { background: rgba(255,255,255,0.3); }
+        .slideshow-btn svg { stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .slideshow-prev { left: 16px; }
+        .slideshow-next { right: 16px; }
+
+        .slideshow-dots {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .slideshow-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .slideshow-dot.active {
+            background: #fff;
+            transform: scale(1.25);
+        }
+
+        .slideshow-counter {
+            position: absolute;
+            top: 16px; right: 18px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.6);
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .slideshow-wrap { height: 320px; }
+            .slideshow-btn { width: 36px; height: 36px; }
+        }
+
+        /* ── CONTACT ──────────────────────────────────── */
+        #kontakt {
+            padding: 110px 0;
+            background: #111111;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .contact-left h2 {
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .contact-lead {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 44px;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .contact-row:first-of-type { border-top: 1px solid rgba(255,255,255,0.08); }
+
+        .c-icon {
+            width: 42px; height: 42px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .c-icon svg {
+            width: 18px; height: 18px;
+            stroke: rgba(255,255,255,0.7);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .c-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 3px;
+        }
+
+        .c-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .c-value a { color: white; text-decoration: none; transition: color var(--ease); }
+        .c-value a:hover { color: var(--red-light); }
+
+        .socials {
+            display: flex;
+            gap: 10px;
+            margin-top: 28px;
+        }
+
+        .s-link {
+            width: 44px; height: 44px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background var(--ease);
+        }
+
+        .s-link:hover { background: var(--red); }
+
+        .s-link svg {
+            width: 18px; height: 18px;
+            stroke: rgba(255,255,255,0.8);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 4px;
+            padding: 44px;
+        }
+
+        .contact-card h3 {
+            font-size: 1.6rem;
+            color: white;
+            margin-bottom: 6px;
+        }
+
+        .contact-card .sub {
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 28px;
+            font-weight: 500;
+        }
+
+        .contact-card p {
+            font-size: 0.93rem;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 18px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--red);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-top: 8px;
+            transition: background var(--ease);
+        }
+
+        .cta-btn:hover { background: var(--red-dark); }
+
+        /* ── FOOTER ───────────────────────────────────── */
+        footer {
+            background: #0a0a0a;
+            padding: 48px 24px 32px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        footer img { height: 30px; margin-bottom: 20px; opacity: 0.85; }
+
+        footer p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.28);
+            line-height: 1.8;
+        }
+
+        footer a { color: rgba(255,255,255,0.45); text-decoration: none; }
+        footer a:hover { color: rgba(255,255,255,0.8); }
+
+        footer .divider {
+            width: 40px; height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 20px auto;
+        }
+
+        /* ── ANIMATIONS ───────────────────────────────── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s !important; }
+        .delay-2 { transition-delay: 0.2s !important; }
+        .delay-3 { transition-delay: 0.3s !important; }
+        .delay-4 { transition-delay: 0.4s !important; }
+
+        /* ── RESPONSIVE ───────────────────────────────── */
+        @media (max-width: 1024px) {
+            .values-grid { grid-template-columns: repeat(3, 1fr); }
+            .team-grid { grid-template-columns: repeat(3, 1fr); }
+            .team-grid .team-card:last-child { grid-column: 2; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .about-grid { grid-template-columns: 1fr; gap: 48px; }
+            .about-badge { right: 0; }
+            .goals-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+            .team-grid .team-card:last-child { grid-column: auto; }
+        }
+
+        @media (max-width: 480px) {
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+            .team-grid { grid-template-columns: 1fr 1fr; }
+            .hero-actions { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ──────────────────────────────────── -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="#hero">
+            <img src="images/logo.png" alt="Mladý HLAS" style="height:38px;">
+        </a>
+        <ul class="nav-links">
+            <li><a href="#o-nas">O nás</a></li>
+            <li><a href="#hodnoty">Hodnoty</a></li>
+            <li><a href="#ciele">Ciele</a></li>
+            <li><a href="#tim">Tím</a></li>
+            <li><a href="#nase-aktivity">Naše aktivity</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+            <li><a href="stanovy.pdf" target="_blank" rel="noopener">Stanovy</a></li>
+            <li><a href="#stan-sa-clenom" class="nav-cta">Zapoj sa</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Otvoriť menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+    <a href="#o-nas"   onclick="closeMobile()">O nás</a>
+    <a href="#hodnoty" onclick="closeMobile()">Hodnoty</a>
+    <a href="#ciele"   onclick="closeMobile()">Ciele</a>
+    <a href="#tim"     onclick="closeMobile()">Tím</a>
+    <a href="#nase-aktivity" onclick="closeMobile()">Naše aktivity</a>
+    <a href="#kontakt" onclick="closeMobile()">Kontakt</a>
+    <a href="stanovy.pdf" target="_blank" rel="noopener" onclick="closeMobile()">Stanovy</a>
+    <a href="#stan-sa-clenom" class="accent" onclick="closeMobile()">Zapoj sa →</a>
+</div>
+
+<!-- ── HERO ────────────────────────────────────────── -->
+<section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-badge">
+            <div class="hero-badge-dot"></div>
+            <span>Mládežnícka organizácia HLAS – SD</span>
+        </div>
+        <h1>Mladí, hlasní<br>a <em>bez filtra.</em></h1>
+        <p class="hero-sub">Robíme politiku pochopiteľnú pre našu generáciu. Veríme, že mladí majú čo povedať – a my sme ich hlas.</p>
+        <div class="hero-actions">
+            <a href="#o-nas"    class="btn btn-red">Zisti viac o nás</a>
+            <a href="#stan-sa-clenom" class="btn btn-outline">Zapoj sa</a>
+        </div>
+    </div>
+    <div class="hero-scroll">
+        <div class="hero-scroll-line"></div>
+        <div class="hero-scroll-label">Scroll</div>
+    </div>
+</section>
+
+<!-- ── ABOUT ────────────────────────────────────────── -->
+<section id="o-nas">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-image-wrap fade-up">
+                <img src="images/about.jpg" alt="Mladý HLAS – stretnutie">
+                <div class="about-badge">
+                    <div class="big">2025</div>
+                    <div class="small">Rok vzniku</div>
+                </div>
+            </div>
+            <div class="about-text fade-up delay-1">
+                <span class="section-label">O nás</span>
+                <h2 class="section-title">Sme Mladý HLAS</h2>
+                <p>Sme komunita mladých ľudí, ktorým nie je jedno, ako sa žije na Slovensku.</p>
+                <p>Nechceme len sledovať, čo sa deje. Chceme sa zapojiť, hovoriť nahlas o veciach, ktoré nás trápia, a hľadať riešenia. Každý z nás má iný príbeh, ale spája nás jedno – chceme krajinu, v ktorej sa oplatí zostať, pracovať a žiť.</p>
+                <div class="pullquote">
+                    <p>„Veríme, že politika môže byť aj slušná, vecná a normálna. A presne taký hlas chceme prinášať."</p>
+                </div>
+                <p>Vychádzame z hodnôt sociálnej demokracie, ktorých základom je solidarita, spravodlivosť, úcta k človeku a rovnosť šancí. Sme generáciou, ktorá nechce len kritizovať, ale ponúkať riešenia.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── PHOTO CAROUSEL ───────────────────────────────── -->
+<div class="carousel-wrap">
+    <div class="carousel-track">
+        <img src="images/More Pics/DSC05594.jpg" alt="">
+        <img src="images/More Pics/DSC00934.jpg" alt="">
+        <img src="images/More Pics/DSC04885.jpg" alt="">
+        <img src="images/More Pics/DSC05146.jpg" alt="">
+        <img src="images/More Pics/DSC00460.jpg" alt="">
+        <img src="images/More Pics/DSC06097.jpg" alt="">
+        <img src="images/More Pics/DSC04808.jpg" alt="">
+        <img src="images/More Pics/DSC05882.jpg" alt="">
+        <img src="images/More Pics/DSC03141.JPG" alt="">
+        <img src="images/More Pics/DSC00663.jpg" alt="">
+        <img src="images/More Pics/DSC04950.jpg" alt="">
+        <img src="images/More Pics/DSC05858.jpg" alt="">
+        <img src="images/More Pics/DSC06251.jpg" alt="">
+        <img src="images/More Pics/DSC04693.jpg" alt="">
+        <img src="images/More Pics/DSC00648.jpg" alt="">
+        <img src="images/More Pics/DSC05187.jpg" alt="">
+        <img src="images/More Pics/DSC04826.jpg" alt="">
+        <img src="images/More Pics/DSC06040.jpg" alt="">
+        <img src="images/More Pics/DSC05491.jpg" alt="">
+        <img src="images/More Pics/DSC03145-2.JPG" alt="">
+        <img src="images/More Pics/DSC04763.jpg" alt="">
+        <img src="images/More Pics/DSC08009.jpg" alt="">
+        <img src="images/More Pics/DSC00507.jpg" alt="">
+        <img src="images/More Pics/DSC05571.jpg" alt="">
+        <img src="images/More Pics/DSC04838.jpg" alt="">
+        <img src="images/More Pics/DSC06119.jpg" alt="">
+        <img src="images/More Pics/DSC05792.jpg" alt="">
+        <img src="images/More Pics/DSC04646.jpg" alt="">
+        <img src="images/More Pics/DSC05588.jpg" alt="">
+        <img src="images/More Pics/DSC06050.jpg" alt="">
+        <img src="images/More Pics/DSC06128.jpg" alt="">
+        <img src="images/Fotky/DSC00676.jpg" alt="">
+        <img src="images/Fotky/DSC00773.jpg" alt="">
+        <img src="images/Fotky/DSC01030.jpg" alt="">
+        <img src="images/Fotky/DSC03343.jpg" alt="">
+        <img src="images/Fotky/DSC03523.jpg" alt="">
+        <img src="images/Fotky/DSC05358.jpg" alt="">
+        <img src="images/Fotky/DSC05525.jpg" alt="">
+        <img src="images/Fotky/DSC05533.jpg" alt="">
+        <img src="images/Fotky/DSC06063.jpg" alt="">
+        <img src="images/Fotky/IMG_3307.jpg" alt="">
+        <img src="images/Fotky/IMG_8395.jpg" alt="">
+        <img src="images/Fotky/DSC05497.jpg" alt="">
+        <img src="images/Fotky/DSC05522.jpg" alt="">
+        <img src="images/Fotky/DSC06128.jpg" alt="">
+        <img src="images/Fotky/68a60828de32e35346f2285e1762e127.JPG" alt="">
+        <img src="images/Fotky/54754365780_58a27baede_k.JPEG" alt="">
+        <img src="images/Fotky/Copy of DSC04103.jpg" alt="">
+        <img src="images/Fotky/DSC00797 2.JPEG" alt="">
+        <img src="images/Fotky/DSC08513 2.JPEG" alt="">
+        <img src="images/Fotky/cdd647bf-0121-44f2-ac21-3d87d80bc455 2.JPG" alt="">
+        <!-- duplicate for seamless infinite loop -->
+        <img src="images/More Pics/DSC05594.jpg" alt="">
+        <img src="images/More Pics/DSC00934.jpg" alt="">
+        <img src="images/More Pics/DSC04885.jpg" alt="">
+        <img src="images/More Pics/DSC05146.jpg" alt="">
+        <img src="images/More Pics/DSC00460.jpg" alt="">
+        <img src="images/More Pics/DSC06097.jpg" alt="">
+        <img src="images/More Pics/DSC04808.jpg" alt="">
+        <img src="images/More Pics/DSC05882.jpg" alt="">
+        <img src="images/More Pics/DSC03141.JPG" alt="">
+        <img src="images/More Pics/DSC00663.jpg" alt="">
+        <img src="images/More Pics/DSC04950.jpg" alt="">
+        <img src="images/More Pics/DSC05858.jpg" alt="">
+        <img src="images/More Pics/DSC06251.jpg" alt="">
+        <img src="images/More Pics/DSC04693.jpg" alt="">
+        <img src="images/More Pics/DSC00648.jpg" alt="">
+        <img src="images/More Pics/DSC05187.jpg" alt="">
+        <img src="images/More Pics/DSC04826.jpg" alt="">
+        <img src="images/More Pics/DSC06040.jpg" alt="">
+        <img src="images/More Pics/DSC05491.jpg" alt="">
+        <img src="images/More Pics/DSC03145-2.JPG" alt="">
+        <img src="images/More Pics/DSC04763.jpg" alt="">
+        <img src="images/More Pics/DSC08009.jpg" alt="">
+        <img src="images/More Pics/DSC00507.jpg" alt="">
+        <img src="images/More Pics/DSC05571.jpg" alt="">
+        <img src="images/More Pics/DSC04838.jpg" alt="">
+        <img src="images/More Pics/DSC06119.jpg" alt="">
+        <img src="images/More Pics/DSC05792.jpg" alt="">
+        <img src="images/More Pics/DSC04646.jpg" alt="">
+        <img src="images/More Pics/DSC05588.jpg" alt="">
+        <img src="images/More Pics/DSC06050.jpg" alt="">
+        <img src="images/More Pics/DSC06128.jpg" alt="">
+        <img src="images/Fotky/DSC00676.jpg" alt="">
+        <img src="images/Fotky/DSC00773.jpg" alt="">
+        <img src="images/Fotky/DSC01030.jpg" alt="">
+        <img src="images/Fotky/DSC03343.jpg" alt="">
+        <img src="images/Fotky/DSC03523.jpg" alt="">
+        <img src="images/Fotky/DSC05358.jpg" alt="">
+        <img src="images/Fotky/DSC05525.jpg" alt="">
+        <img src="images/Fotky/DSC05533.jpg" alt="">
+        <img src="images/Fotky/DSC06063.jpg" alt="">
+        <img src="images/Fotky/IMG_3307.jpg" alt="">
+        <img src="images/Fotky/IMG_8395.jpg" alt="">
+        <img src="images/Fotky/DSC05497.jpg" alt="">
+        <img src="images/Fotky/DSC05522.jpg" alt="">
+        <img src="images/Fotky/DSC06128.jpg" alt="">
+        <img src="images/Fotky/68a60828de32e35346f2285e1762e127.JPG" alt="">
+        <img src="images/Fotky/54754365780_58a27baede_k.JPEG" alt="">
+        <img src="images/Fotky/Copy of DSC04103.jpg" alt="">
+        <img src="images/Fotky/DSC00797 2.JPEG" alt="">
+        <img src="images/Fotky/DSC08513 2.JPEG" alt="">
+        <img src="images/Fotky/cdd647bf-0121-44f2-ac21-3d87d80bc455 2.JPG" alt="">
+    </div>
+</div>
+
+<!-- ── VALUES ───────────────────────────────────────── -->
+<section id="hodnoty">
+    <div class="container">
+        <div class="values-intro">
+            <span class="section-label">„Naše desatoro"</span>
+            <h2 class="section-title">Naše hodnoty</h2>
+            <p>Kliknite na každú hodnotu a dozviete sa viac o tom, v čo veríme a za čím si stojíme.</p>
+        </div>
+
+        <div class="values-grid">
+            <div class="value-card" onclick="toggleCard(this)">
+                <div class="v-num">01</div>
+                <div class="v-title">„ROZDIELNE NÁZORY, SPOLOČNÁ ÚCTA"</div>
+                <div class="v-short">Rešpektujeme rozdiely, odmietame polarizáciu.</div>
+                <div class="v-expand">
+                    <p>Veríme v kultúru rešpektu, slušnosti a otvoreného dialógu. V čase narastajúcej polarizácie odmietame extrémy a hľadáme to, čo nás spája. Každý človek má právo na dôstojnosť – bez ohľadu na pôvod, vierovyznanie, orientáciu či politický názor.</p>
+                </div>
+                <div class="v-plus"></div>
+            </div>
+
+            <div class="value-card" onclick="toggleCard(this)">
+                <div class="v-num">02</div>
+                <div class="v-title">„NIE SME OZVENA, SME PRIESTOR"</div>
+                <div class="v-short">Podporujeme otvorenú a objektívnu diskusiu.</div>
+                <div class="v-expand">
+                    <p>Podporujeme otvorenú, hodnotovo ukotvenú diskusiu, ktorá stojí na faktoch, rešpekte a slušnosti. Odmietame ideologickú slepotu – namiesto nej presadzujeme kritické myslenie, objektivitu a schopnosť viesť vecnú debatu.</p>
+                </div>
+                <div class="v-plus"></div>
+            </div>
+
+            <div class="value-card" onclick="toggleCard(this)">
+                <div class="v-num">03</div>
+                <div class="v-title">„ROZUM NIE JE ELITÁRSKY"</div>
+                <div class="v-short">Staviame na odbornosti a dostupnom vzdelaní.</div>
+                <div class="v-expand">
+                    <p>Podporujeme odbornosť vo vzdelávaní aj v rozhodovaní. Veríme, že vzdelanie má učiť myslieť, nielen bezhlavo memorovať. Stojíme za podporou školstva, vedy a výskumu ako prirodzenej súčasti spoločenského rozvoja.</p>
+                </div>
+                <div class="v-plus"></div>
+            </div>
+
+            <div class="value-card" onclick="toggleCard(this)">
+                <div class="v-num">04</div>
+                <div class="v-title">„RODINA FORMUJE, HODNOTY SPREVÁDZAJÚ"</div>
+                <div class="v-short">Rodina je základ našej spoločnosti.</div>
+                <div class="v-expand">
+                    <p>Rodinu vnímame ako prirodzenú a nenahraditeľnú súčasť spoločnosti. Podporujeme jej stabilitu, vzájomnú zodpovednosť a medzigeneračnú solidaritu. Rešpektujeme dôstojnosť každého jednotlivca.</p>
+                </div>
+                <div class="v-plus"></div>
+            </div>
+
+            <div class="value-card" onclick="toggleCard(this)">
+                <div class="v-num">05</div>
+                <div class="v-title">„PAMÄTÁME SI. NASLEDUJEME."</div>
+                <div class="v-short">Ctíme si tradície a medzigeneračnú kontinuitu.</div>
+                <div class="v-expand">
+                    <p>Veríme v silu tradícií a úctu k tým, ktorí tu boli pred nami. Podporujeme medzigeneračnú súdržnosť a nadväznosť na kultúrne, historické a spoločenské korene. Staršie generácie si zaslúžia rešpekt, nie zosmiešňovanie.</p>
+                </div>
+                <div class="v-plus"></div>
+            </div>
+
+            <div class="value-card" onclick="toggleCard(this)">
+                <div class="v-num">06</div>
+                <div class="v-title">„SRDCE PRE KRAJINU, REŠPEKT PRE VŠETKÝCH"</div>
+                <div class="v-short">Podporujeme zdravé vlastenectvo.</div>
+                <div class="v-expand">
+                    <p>Sme hrdí na svoju krajinu, jej tradície, kultúru a jazyk. Podporujeme vlastenectvo, ktoré vychádza z rešpektu, úcty a zodpovednosti – nie zo strachu či nenávisti. Odmietame extrémizmus v akejkoľvek forme.</p>
+                </div>
+                <div class="v-plus"></div>
+            </div>
+
+            <div class="value-card" onclick="toggleCard(this)">
+                <div class="v-num">07</div>
+                <div class="v-title">„ROVNOSŤ PRÍLEŽITOSTÍ"</div>
+                <div class="v-short">Zameriavame sa na problémy mladých.</div>
+                <div class="v-expand">
+                    <p>Podporujeme mladých a študentov v ich každodenných výzvach. Záleží nám na rovnosti príležitostí, dostupnosti internátov, rozvoji možností cestovania a platených stáží, ktoré pomáhajú budovať samostatnosť.</p>
+                </div>
+                <div class="v-plus"></div>
+            </div>
+
+            <div class="value-card" onclick="toggleCard(this)">
+                <div class="v-num">08</div>
+                <div class="v-title">„BUĎ HLASOM, NIE DIVÁKOM"</div>
+                <div class="v-short">Aktivita nad pasivitou.</div>
+                <div class="v-expand">
+                    <p>Odmietame apatiu a pasívny prístup k životu. Mladí ľudia sú budúcnosťou a majú zodpovednosť aktívne sa zapájať do spoločenských, politických a komunitných procesov. Nie je dosť len sledovať – treba konať.</p>
+                </div>
+                <div class="v-plus"></div>
+            </div>
+
+            <div class="value-card" onclick="toggleCard(this)">
+                <div class="v-num">09</div>
+                <div class="v-title">„SILNÍ V JEDNOTE, SLABÍ V NENÁVISTI"</div>
+                <div class="v-short">Odmietame extrémizmus v akejkoľvek forme.</div>
+                <div class="v-expand">
+                    <p>Odsudzujeme všetky formy extrémizmu, násilia a nenávisti. Fašizmus, nacizmus, rasizmus a ideologické fanatizmy nemajú miesto v spoločnosti, ktorá si váži slobodu a rovnosť. Budujeme spoločnosť na tolerancii a úcte.</p>
+                </div>
+                <div class="v-plus"></div>
+            </div>
+
+            <div class="value-card" onclick="toggleCard(this)">
+                <div class="v-num">10</div>
+                <div class="v-title">„JASNÉ PRAVIDLÁ, SILNÁ DEMOKRACIA"</div>
+                <div class="v-short">Stojíme za EÚ, NATO a právnym štátom.</div>
+                <div class="v-expand">
+                    <p>Trváme na jasných pravidlách a zákonoch, ktoré platia rovnako pre všetkých. Veríme v spravodlivosť a rešpekt k ústave. Podporujeme pevné zakotvenie Slovenska v Európskej únii a NATO.</p>
+                </div>
+                <div class="v-plus"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── QUOTE BAND ────────────────────────────────────── -->
+<div class="quote-band">
+    <blockquote>
+        „Buď budeme súčasťou riešení,<br>
+        <em>alebo zostaneme súčasťou problémov."</em>
+    </blockquote>
+</div>
+
+<!-- ── GOALS ────────────────────────────────────────── -->
+<section id="ciele">
+    <div class="container">
+        <span class="section-label">Naše piliere</span>
+        <h2 class="section-title">Čo presadzujeme</h2>
+        <div class="goals-grid">
+            <div class="goal-card fade-up">
+                <div class="goal-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <div class="goal-title">Sociálna demokracia</div>
+                <p>Veríme v slušnú a vecnú diskusiu aj pri rozdielnych názoroch. Staviame na faktoch, odbornosti a rešpekte – nie na kriku a extrémoch. Solidarita a spravodlivosť sú základom zdravej spoločnosti.</p>
+            </div>
+
+            <div class="goal-card fade-up delay-1">
+                <div class="goal-icon">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                </div>
+                <div class="goal-title">Mladí a ich šance</div>
+                <p>Záleží nám na mladých a na tom, aby mali reálne šance na Slovensku žiť, pracovať a rásť. Sme generácia, ktorá nechce len sledovať – chce meniť veci k lepšiemu pre celú krajinu.</p>
+            </div>
+
+            <div class="goal-card fade-up delay-2">
+                <div class="goal-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
+                <div class="goal-title">Spravodlivosť a pravidlá</div>
+                <p>Stojíme za spravodlivosťou, jasnými pravidlami a pevným ukotvením Slovenska v Európskej únii a NATO. Rovnaké pravidlá pre všetkých – základ fungovania demokratického štátu.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── TEAM ──────────────────────────────────────────── -->
+<section id="tim">
+    <div class="container">
+        <span class="section-label">Ľudia za Mladým Hlasom</span>
+        <h2 class="section-title">Náš tím</h2>
+        <div class="team-grid">
+            <div class="team-card lead">
+                <div class="team-photo">
+                    <img src="images/team-monika.jpg" alt="Monika Ivanusyková">
+                </div>
+                <div class="team-info">
+                    <div class="team-name">Monika Ivanusyková</div>
+                    <div class="team-role">Predsedníčka</div>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-photo">
+                    <img src="images/team-lujza.jpg" alt="Lujza Viežbová">
+                </div>
+                <div class="team-info">
+                    <div class="team-name">Lujza Viežbová</div>
+                    <div class="team-role">Podpredsedníčka</div>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-photo">
+                    <img src="images/team-samuel.jpg" alt="Samuel Maťáš">
+                </div>
+                <div class="team-info">
+                    <div class="team-name">Samuel Maťáš</div>
+                    <div class="team-role">Podpredseda</div>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-photo">
+                    <img src="images/team-peter-s.jpg" alt="Peter Sokol">
+                </div>
+                <div class="team-info">
+                    <div class="team-name">Peter Sokol</div>
+                    <div class="team-role">Podpredseda</div>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-photo">
+                    <img src="images/team-peter-k.jpg" alt="Peter Kucharčík">
+                </div>
+                <div class="team-info">
+                    <div class="team-name">Peter Kucharčík</div>
+                    <div class="team-role">Podpredseda</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── GALLERY ───────────────────────────────────────── -->
+<section id="nase-aktivity">
+    <div class="container">
+        <span class="section-label">Čo robíme</span>
+        <h2 class="section-title">Naše aktivity</h2>
+        <div class="slideshow-wrap" id="gallerySlideshow">
+            <div class="slideshow-track" id="slideshowTrack">
+                <div class="slideshow-slide"><img src="images/gallery-sefovia.jpg" alt="Mladý HLAS – šéfovia"></div>
+                <div class="slideshow-slide"><img src="images/gallery-predsednictvo.jpg" alt="Mladý HLAS – predsedníctvo"></div>
+                <div class="slideshow-slide"><img src="images/gallery-aktivita1.jpg" alt="Mladý HLAS – aktivita"></div>
+                <div class="slideshow-slide"><img src="images/gallery-aktivita2.jpg" alt="Mladý HLAS – aktivita"></div>
+                <div class="slideshow-slide"><img src="images/gallery-flower.jpg" alt="Mladý HLAS – kvet"></div>
+                <div class="slideshow-slide"><img src="images/gallery1.jpg" alt="Mladý HLAS – aktivita"></div>
+                <div class="slideshow-slide"><img src="images/gallery2.jpg" alt="Mladý HLAS – aktivita"></div>
+                <div class="slideshow-slide"><img src="images/gallery3.jpg" alt="Mladý HLAS – aktivita"></div>
+                <div class="slideshow-slide"><img src="images/gallery4.jpg" alt="Mladý HLAS – aktivita"></div>
+                <div class="slideshow-slide"><img src="images/Fotky/DSC05358.jpg" alt="Mladý HLAS – aktivita"></div>
+                <div class="slideshow-slide"><img src="images/Fotky/DSC06063.jpg" alt="Mladý HLAS – aktivita"></div>
+                <div class="slideshow-slide"><img src="images/Fotky/DSC01030.jpg" alt="Mladý HLAS – aktivita"></div>
+            </div>
+
+            <button class="slideshow-btn slideshow-prev" onclick="moveSlide(-1)" aria-label="Predchádzajúca">
+                <svg viewBox="0 0 24 24" width="22" height="22"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="slideshow-btn slideshow-next" onclick="moveSlide(1)" aria-label="Nasledujúca">
+                <svg viewBox="0 0 24 24" width="22" height="22"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+
+            <div class="slideshow-dots" id="slideshowDots">
+                <button class="slideshow-dot active" onclick="goToSlide(0)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(1)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(2)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(3)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(4)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(5)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(6)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(7)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(8)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(9)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(10)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(11)"></button>
+            </div>
+            <div class="slideshow-counter" id="slideshowCounter">1 / 12</div>
+        </div>
+    </div>
+</section>
+
+<!-- ── CONTACT ───────────────────────────────────────── -->
+<section id="kontakt">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-left fade-up">
+                <span class="section-label" style="color:rgba(255,255,255,0.4)">Spojte sa s nami</span>
+                <h2>Zapojte sa do<br>Mladého HLASU</h2>
+                <p class="contact-lead">Budúcnosť sa sama nevytvorí. Buď aj ty Hlasom zmeny.</p>
+
+                <div class="contact-row">
+                    <div class="c-icon">
+                        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </div>
+                    <div>
+                        <div class="c-label">Email</div>
+                        <div class="c-value"><a href="mailto:mladyhlas@strana-hlas.sk">mladyhlas@strana-hlas.sk</a></div>
+                    </div>
+                </div>
+
+                <div class="contact-row">
+                    <div class="c-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <div>
+                        <div class="c-label">Web strany</div>
+                        <div class="c-value"><a href="https://www.strana-hlas.sk" target="_blank" rel="noopener">strana-hlas.sk</a></div>
+                    </div>
+                </div>
+
+                <div class="socials">
+                    <a href="https://www.instagram.com/mlady_hlas/" target="_blank" rel="noopener" class="s-link" title="Instagram">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://www.facebook.com/mlady.hlas/" target="_blank" rel="noopener" class="s-link" title="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-card fade-up delay-1" id="stan-sa-clenom">
+                <h3>Staň sa členom</h3>
+                <p class="sub">Mládežnícka organizácia HLAS – sociálna demokracia</p>
+                <p>Sme priestorom pre mladú generáciu, ktorá verí, že politika má slúžiť ľuďom – nie ideológiám, extrémom či osobným ambíciám.</p>
+                <p>Chceš sa zapojiť? Je to jednoduché:</p>
+                <ol style="color:rgba(255,255,255,0.75);font-size:0.9rem;line-height:1.9;padding-left:20px;margin:12px 0 20px;">
+                    <li>Stiahni a vyplň prihlášku nižšie</li>
+                    <li>Pošli ju na <strong style="color:#fff">mladyhlas@strana-hlas.sk</strong></li>
+                    <li>My sa ti ozveme</li>
+                </ol>
+                <a href="ziadost.pdf" download class="cta-btn" style="margin-bottom:12px;display:flex;align-items:center;gap:8px;justify-content:center;">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Stiahnuť prihlášku
+                </a>
+                <a href="mailto:mladyhlas@strana-hlas.sk?subject=Prihláška za riadneho člena" class="cta-btn" style="background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;">Odoslať prihlášku emailom →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── FOOTER ────────────────────────────────────────── -->
+<footer>
+    <img src="images/logo.png" alt="Mladý HLAS">
+    <p>Mladý HLAS – mládežnícka organizácia <a href="https://www.strana-hlas.sk" target="_blank" rel="noopener">HLAS – sociálna demokracia</a></p>
+    <p>Trnavská cesta 3273/37, 831 04 Bratislava – Nové Mesto &nbsp;·&nbsp; <a href="mailto:mladyhlas@strana-hlas.sk">mladyhlas@strana-hlas.sk</a></p>
+    <div style="margin: 20px 0;">
+        <a href="stanovy.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border:1px solid rgba(255,255,255,0.2);border-radius:3px;font-size:13px;font-weight:600;letter-spacing:1px;color:rgba(255,255,255,0.7);text-decoration:none;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.6)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)';this.style.color='rgba(255,255,255,0.7)'">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+            STANOVY ORGANIZÁCIE
+        </a>
+    </div>
+    <div class="divider"></div>
+    <p style="font-size:12px">© 2026 Mladý HLAS. Všetky práva vyhradené.</p>
+</footer>
+
+<script>
+    /* ── Mobile nav ── */
+    const ham = document.getElementById('hamburger');
+    const mob = document.getElementById('mobileNav');
+
+    ham.addEventListener('click', () => {
+        ham.classList.toggle('open');
+        mob.classList.toggle('open');
+    });
+
+    function closeMobile() {
+        ham.classList.remove('open');
+        mob.classList.remove('open');
+    }
+
+    document.addEventListener('click', e => {
+        if (!ham.contains(e.target) && !mob.contains(e.target)) closeMobile();
+    });
+
+    /* ── Values toggle ── */
+    function toggleCard(card) {
+        const expand = card.querySelector('.v-expand');
+        const wasOpen = card.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.value-card').forEach(c => {
+            c.classList.remove('open');
+            c.querySelector('.v-expand').classList.remove('open');
+        });
+
+        // Re-open if it wasn't already
+        if (!wasOpen) {
+            card.classList.add('open');
+            expand.classList.add('open');
+        }
+    }
+
+    /* ── Scroll animations ── */
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    /* ── Navbar elevation on scroll ── */
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').style.boxShadow =
+            window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.1)' : 'none';
+    }, { passive: true });
+
+    /* ── Gallery slideshow ── */
+    let currentSlide = 0;
+    const totalSlides = 12;
+    const track = document.getElementById('slideshowTrack');
+    const dots  = document.querySelectorAll('.slideshow-dot');
+    const counter = document.getElementById('slideshowCounter');
+    let autoTimer = null;
+
+    function updateSlideshow() {
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+        counter.textContent = `${currentSlide + 1} / ${totalSlides}`;
+    }
+
+    function moveSlide(dir) {
+        currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+        updateSlideshow();
+        resetAutoplay();
+    }
+
+    function goToSlide(n) {
+        currentSlide = n;
+        updateSlideshow();
+        resetAutoplay();
+    }
+
+    function resetAutoplay() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(() => moveSlide(1), 5500);
+    }
+
+    // Pause on hover
+    const slideshow = document.getElementById('gallerySlideshow');
+    slideshow.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    slideshow.addEventListener('mouseleave', resetAutoplay);
+
+    // Swipe support
+    let touchStartX = 0;
+    slideshow.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    slideshow.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) moveSlide(diff > 0 ? 1 : -1);
+    });
+
+    resetAutoplay();
+</script>
+
+</body>
+</html>
