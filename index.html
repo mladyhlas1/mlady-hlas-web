@@ -729,14 +729,6 @@
             background: var(--dark);
         }
 
-        @supports (aspect-ratio: 1) {
-            @media (max-width: 768px) {
-                .slideshow-wrap {
-                    height: auto;
-                    aspect-ratio: 3/2;
-                }
-            }
-        }
 
         .slideshow-track {
             display: flex;
@@ -1011,21 +1003,80 @@
         }
 
         @media (max-width: 768px) {
+            /* Nav */
             .nav-links { display: none; }
             .hamburger { display: flex; }
-            .about-grid { grid-template-columns: 1fr; gap: 48px; }
-            .about-badge { right: 0; }
-            .goals-grid { grid-template-columns: 1fr; }
-            .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+
+            /* Section spacing */
+            #o-nas, #hodnoty, #ciele, #tim, #nase-aktivity { padding: 64px 0; }
+            #kontakt { padding: 64px 0; }
+
+            /* Hero */
+            .hero-content { padding: 100px 24px 72px; }
+            .hero-sub { font-size: 0.93rem; margin-bottom: 32px; }
+            .hero-scroll { display: none; }
+
+            /* About */
+            .about-grid { grid-template-columns: 1fr; gap: 56px; }
+            .about-badge { right: 0; bottom: -16px; }
+
+            /* Values */
             .values-grid { grid-template-columns: repeat(2, 1fr); }
-            .team-grid { grid-template-columns: repeat(2, 1fr); }
+
+            /* Goals */
+            .goals-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
+            .goal-card { padding: 28px 24px; }
+
+            /* Team */
+            .team-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 40px; }
             .team-grid .team-card:last-child { grid-column: auto; }
+
+            /* Slideshow — use vw-based height so height:100% on children works reliably */
+            .slideshow-wrap { height: 60vw; max-height: 420px; }
+            .slideshow-btn { width: 36px; height: 36px; }
+
+            /* Contact */
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .contact-card { padding: 28px 22px; }
+            .contact-left h2 { font-size: 1.9rem; }
+
+            /* Quote band */
+            .quote-band { padding: 56px 24px; }
         }
 
         @media (max-width: 480px) {
-            .values-grid { grid-template-columns: repeat(2, 1fr); }
-            .team-grid { grid-template-columns: 1fr 1fr; }
+            /* Hero */
+            #hero h1 { font-size: clamp(2.1rem, 9vw, 3rem); }
             .hero-actions { flex-direction: column; }
+            .btn { text-align: center; }
+
+            /* Section headings */
+            .section-title { font-size: 1.75rem; }
+
+            /* Values */
+            .values-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .value-card { padding: 20px 14px 38px; }
+
+            /* Team */
+            .team-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .team-info { padding: 12px 14px; }
+            .team-name { font-size: 13px; }
+            .team-role { font-size: 11px; }
+
+            /* Goals */
+            .goal-card { padding: 24px 18px; }
+
+            /* Slideshow */
+            .slideshow-wrap { height: 66vw; }
+            .slideshow-dots { bottom: 12px; }
+            .slideshow-counter { font-size: 11px; }
+
+            /* Contact */
+            .contact-card { padding: 22px 16px; }
+            .contact-card h3 { font-size: 1.3rem; }
+
+            /* About badge stays visible */
+            .about-image-wrap { margin-bottom: 16px; }
         }
     </style>
 </head>
