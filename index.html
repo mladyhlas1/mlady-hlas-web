@@ -1031,8 +1031,17 @@
             .team-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 40px; }
             .team-grid .team-card:last-child { grid-column: auto; }
 
-            /* Slideshow — use vw-based height so height:100% on children works reliably */
-            .slideshow-wrap { height: 60vw; max-height: 420px; }
+            /* Slideshow — break the fragile height:100% chain.
+               Give aspect-ratio directly to the slide so the
+               wrap/track just follow naturally. */
+            .slideshow-wrap  { height: auto; }
+            .slideshow-track { height: auto; align-items: stretch; }
+            .slideshow-slide {
+                aspect-ratio: 3/2;
+                height: auto;
+                overflow: hidden;
+            }
+            .slideshow-slide img { height: 100%; }
             .slideshow-btn { width: 36px; height: 36px; }
 
             /* Contact */
@@ -1067,7 +1076,6 @@
             .goal-card { padding: 24px 18px; }
 
             /* Slideshow */
-            .slideshow-wrap { height: 66vw; }
             .slideshow-dots { bottom: 12px; }
             .slideshow-counter { font-size: 11px; }
 
