@@ -1031,26 +1031,7 @@
             .team-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 40px; }
             .team-grid .team-card:last-child { grid-column: auto; }
 
-            /* Slideshow — padding-bottom trick: percentage padding always
-               resolves against width, guaranteeing a 3:2 box without
-               any fragile height-inheritance chain. Track is absolutely
-               positioned inside so height:100% resolves reliably. */
-            .slideshow-wrap {
-                height: 0;
-                padding-bottom: 66.67%;
-                overflow: hidden;
-            }
-            .slideshow-track {
-                position: absolute;
-                inset: 0;
-                height: 100%;
-                align-items: stretch;
-            }
-            .slideshow-slide {
-                height: 100%;
-                aspect-ratio: auto;
-            }
-            .slideshow-slide img { height: 100%; }
+            /* Slideshow height set by JS for reliability */
             .slideshow-btn { width: 36px; height: 36px; }
 
             /* Contact */
@@ -1678,6 +1659,21 @@
     }, { passive: true });
 
     /* ── Gallery slideshow ── */
+
+    // Set slideshow height explicitly on mobile — avoids all CSS height-inheritance issues
+    // in scrollable flex containers across different mobile browsers.
+    function fixSlideshowHeight() {
+        const wrap = document.getElementById('gallerySlideshow');
+        if (!wrap) return;
+        if (window.innerWidth <= 768) {
+            wrap.style.height = Math.round(wrap.getBoundingClientRect().width * (2 / 3)) + 'px';
+        } else {
+            wrap.style.height = '';
+        }
+    }
+    fixSlideshowHeight();
+    window.addEventListener('resize', fixSlideshowHeight);
+
     let currentSlide = 0;
     const totalSlides = 12;
     const track = document.getElementById('slideshowTrack');
