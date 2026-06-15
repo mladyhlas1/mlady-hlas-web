@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mladý HLAS</title>
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #CC1A25;
+    --red-dark: #a81520;
+    --bg: #0a0a0a;
+    --surface: #111;
+    --surface2: #1a1a1a;
+    --text: #e8e8e8;
+    --muted: rgba(255,255,255,0.55);
+    --border: rgba(255,255,255,0.08);
+    --radius: 6px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 60px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo img { height: 34px; width: auto; }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-nav {
+    position: fixed;
+    top: 60px; left: 0; right: 0;
+    background: rgba(10,10,10,0.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    z-index: 99;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+  .mobile-nav.open { max-height: 400px; }
+  .mobile-nav a {
+    display: block;
+    padding: 15px 24px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-nav a:last-child { border-bottom: none; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100svh;
+    background: linear-gradient(160deg, #1a0205 0%, #0a0a0a 60%);
+    display: flex;
+    align-items: center;
+    padding: 80px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(204,26,37,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(204,26,37,0.15);
+    border: 1px solid rgba(204,26,37,0.35);
+    border-radius: 40px;
+    padding: 6px 16px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #e87b82;
+    margin-bottom: 24px;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--red);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  #hero h1 {
+    font-size: clamp(2rem, 9vw, 3rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+  #hero h1 em {
+    font-style: normal;
+    color: var(--red);
+  }
+  .hero-sub {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    max-width: 380px;
+  }
+  .hero-btns { display: flex; flex-direction: column; gap: 12px; }
+  .btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--red);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 15px 28px;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--red-dark); }
+  .btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+  /* ── SECTIONS ── */
+  section { padding: 64px 0; }
+  .container { width: 100%; max-width: 480px; margin: 0 auto; padding: 0 24px; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 20px; height: 2px;
+    background: var(--red);
+  }
+
+  h2 {
+    font-size: clamp(1.6rem, 6vw, 2rem);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+  }
+
+  /* ── ABOUT ── */
+  #o-nas .about-img {
+    width: 100%;
+    border-radius: var(--radius);
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    margin-bottom: 32px;
+  }
+  #o-nas .year-badge {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  #o-nas p {
+    color: var(--muted);
+    margin-bottom: 16px;
+    font-size: 0.93rem;
+  }
+  .pullquote {
+    border-left: 3px solid var(--red);
+    padding: 12px 16px;
+    margin: 28px 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--text);
+    background: rgba(204,26,37,0.06);
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ── VALUES ── */
+  #hodnoty { background: var(--surface); }
+  .values-list { margin-top: 32px; display: flex; flex-direction: column; gap: 1px; }
+  .value-item {
+    background: var(--surface2);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  .value-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .value-num {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--red);
+    min-width: 24px;
+  }
+  .value-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    flex: 1;
+  }
+  .value-arrow {
+    width: 18px; height: 18px;
+    fill: none;
+    stroke: var(--muted);
+    stroke-width: 2;
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+  .value-item.open .value-arrow { transform: rotate(180deg); }
+  .value-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 18px;
+  }
+  .value-item.open .value-body { max-height: 300px; }
+  .value-body p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+    padding-bottom: 16px;
+  }
+
+  /* ── QUOTE BAND ── */
+  .quote-band {
+    background: var(--red);
+    padding: 56px 24px;
+    text-align: center;
+  }
+  .quote-band blockquote {
+    font-size: clamp(1.15rem, 4.5vw, 1.4rem);
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1.5;
+    color: #fff;
+    max-width: 420px;
+    margin: 0 auto 16px;
+  }
+  .quote-band cite {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* ── GOALS ── */
+  .goals-grid { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+  .goal-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+  }
+  .goal-card .g-num {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 12px;
+    opacity: 0.6;
+  }
+  .goal-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .goal-card p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── TEAM ── */
+  #tim { background: var(--surface); }
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .team-card {
+    background: var(--surface2);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-align: center;
+  }
+  .team-card img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: top;
+  }
+  .team-info { padding: 14px 10px; }
+  .team-name {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .team-role {
+    font-size: 0.68rem;
+    color: var(--red);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── ACTIVITIES ── */
+  #nase-aktivity .photo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 28px;
+  }
+  #nase-aktivity .photo-grid img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  #nase-aktivity .photo-grid img.wide {
+    grid-column: span 2;
+    aspect-ratio: 16/7;
+  }
+  .instagram-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+    padding: 14px 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: var(--radius);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: border-color 0.2s;
+  }
+  .instagram-link:hover { border-color: rgba(255,255,255,0.4); }
+
+  /* ── CONTACT ── */
+  #kontakt { background: var(--surface); }
+  .contact-block {
+    background: var(--surface2);
+    border-radius: var(--radius);
+    padding: 28px 22px;
+    margin-top: 28px;
+  }
+  .contact-block + .contact-block { margin-top: 12px; }
+  .contact-block h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .contact-block .sub {
+    font-size: 0.78rem;
+    color: var(--red);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+  }
+  .contact-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .contact-row svg { flex-shrink: 0; opacity: 0.6; }
+  .contact-row a { color: var(--text); }
+  .social-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .social-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+  }
+  .social-btn:hover { background: rgba(255,255,255,0.1); }
+
+  /* membership card */
+  .member-steps {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.87rem;
+    line-height: 1.9;
+    padding-left: 20px;
+    margin: 14px 0 20px;
+  }
+  .member-steps li { margin-bottom: 4px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050505;
+    border-top: 1px solid var(--border);
+    padding: 40px 24px 32px;
+    text-align: center;
+  }
+  footer img {
+    height: 36px;
+    margin: 0 auto 16px;
+  }
+  footer p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+  footer a { color: rgba(255,255,255,0.6); text-decoration: underline; }
+  footer .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+  .footer-stanovy {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 3px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin: 16px 0;
+    text-decoration: none !important;
+  }
+
+  /* ── DESKTOP REDIRECT NOTICE ── */
+  .desktop-bar {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--surface2);
+    border-top: 1px solid var(--border);
+    padding: 12px 20px;
+    font-size: 0.78rem;
+    text-align: center;
+    z-index: 200;
+  }
+  .desktop-bar a { color: var(--red); font-weight: 600; margin-left: 6px; }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="#hero"><img src="images/logo.png" alt="Mladý HLAS"></a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#o-nas" onclick="closeNav()">O nás</a>
+  <a href="#hodnoty" onclick="closeNav()">Hodnoty</a>
+  <a href="#ciele" onclick="closeNav()">Ciele</a>
+  <a href="#tim" onclick="closeNav()">Tím</a>
+  <a href="#nase-aktivity" onclick="closeNav()">Aktivity</a>
+  <a href="#kontakt" onclick="closeNav()">Kontakt</a>
+  <a href="#stan-sa-clenom" onclick="closeNav()" style="color:var(--red);">Staň sa členom →</a>
+</div>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div>
+    <div class="hero-badge">Mladá generácia HLAS</div>
+    <h1>Mladí, hlasní<br>a bez <em>filtra.</em></h1>
+    <p class="hero-sub">Sme mládežnícka organizácia strany HLAS – sociálna demokracia. Politiku berieme vážne, ale bez prílišnej formality.</p>
+    <div class="hero-btns">
+      <a href="#stan-sa-clenom" class="btn-primary">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+        Staň sa členom
+      </a>
+      <a href="#o-nas" class="btn-secondary">Zistiť viac</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="o-nas">
+  <div class="container">
+    <img class="about-img" src="images/about.jpg" alt="Mladý HLAS tím">
+    <span class="section-label">O nás</span>
+    <div class="year-badge">Seit 2021</div>
+    <h2>Sme hlas<br>mladej generácie</h2>
+    <p>Mladý HLAS je mládežnícka organizácia strany HLAS – sociálna demokracia. Združujeme mladých ľudí, ktorí chcú aktívne ovplyvňovať dianie na Slovensku.</p>
+    <p>Veríme, že politika má slúžiť ľuďom – nie ideológiám, extrémom, ani osobným ambíciám. Zastávame hodnoty sociálnej demokracie: solidaritu, slobodu a férovosť.</p>
+    <div class="pullquote">"Politika je príliš dôležitá, aby sme ju nechali len na tých, čo sú pri nej roky."</div>
+    <p>Chceme byť priestorom, kde mladí ľudia nájdu svojich rovesníkov, rozvíjajú sa a reálne ovplyvňujú budúcnosť Slovenska.</p>
+  </div>
+</section>
+
+<!-- ── VALUES ── -->
+<section id="hodnoty">
+  <div class="container">
+    <span class="section-label">Hodnoty</span>
+    <h2>Čo nás<br>definuje</h2>
+
+    <div class="values-list" id="valuesList">
+
+      <div class="value-item">
+        <div class="value-header" onclick="toggleValue(this)">
+          <span class="value-num">01</span>
+          <span class="value-title">Solidarita</span>
+          <svg class="value-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="value-body"><p>Silnejší pomáhajú slabším. Spoločnosť je tak silná, ako jej najzraniteľnejší členovia.</p></div>
+      </div>
+
+      <div class="value-item">
+        <div class="value-header" onclick="toggleValue(this)">
+          <span class="value-num">02</span>
+          <span class="value-title">Sloboda</span>
+          <svg class="value-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="value-body"><p>Každý má právo žiť podľa vlastných predstáv – pokiaľ tým neobmedzuje slobodu iných.</p></div>
+      </div>
+
+      <div class="value-item">
+        <div class="value-header" onclick="toggleValue(this)">
+          <span class="value-num">03</span>
+          <span class="value-title">Férovosť</span>
+          <svg class="value-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="value-body"><p>Rovnaké pravidlá pre všetkých. Bez dvojakého metra, bez výnimiek pre privilegovaných.</p></div>
+      </div>
+
+      <div class="value-item">
+        <div class="value-header" onclick="toggleValue(this)">
+          <span class="value-num">04</span>
+          <span class="value-title">Zodpovednosť</span>
+          <svg class="value-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="value-body"><p>Za svoje slová, činy aj rozhodnutia. Zodpovednosť voči sebe, komunite aj budúcim generáciám.</p></div>
+      </div>
+
+      <div class="value-item">
+        <div class="value-header" onclick="toggleValue(this)">
+          <span class="value-num">05</span>
+          <span class="value-title">Odvaha</span>
+          <svg class="value-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="value-body"><p>Povedať nepopulárnu pravdu. Postaviť sa extrémom. Hľadať riešenia, nie výhovorky.</p></div>
+      </div>
+
+      <div class="value-item">
+        <div class="value-header" onclick="toggleValue(this)">
+          <span class="value-num">06</span>
+          <span class="value-title">Dialóg</span>
+          <svg class="value-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="value-body"><p>Počúvame, diskutujeme, hľadáme zhodu. Aj s tými, s ktorými nesúhlasíme.</p></div>
+      </div>
+
+      <div class="value-item">
+        <div class="value-header" onclick="toggleValue(this)">
+          <span class="value-num">07</span>
+          <span class="value-title">Inovácia</span>
+          <svg class="value-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="value-body"><p>Problémy 21. storočia potrebujú moderné riešenia. Otvorene skúšame nové prístupy.</p></div>
+      </div>
+
+      <div class="value-item">
+        <div class="value-header" onclick="toggleValue(this)">
+          <span class="value-num">08</span>
+          <span class="value-title">Inklúzia</span>
+          <svg class="value-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="value-body"><p>Miesto tu má každý, bez ohľadu na pôvod, pohlavie či presvedčenie. Rozmanitosť nás obohacuje.</p></div>
+      </div>
+
+      <div class="value-item">
+        <div class="value-header" onclick="toggleValue(this)">
+          <span class="value-num">09</span>
+          <span class="value-title">Transparentnosť</span>
+          <svg class="value-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="value-body"><p>Otvorene komunikujeme o tom, čo robíme a prečo. Bez skrytých agend.</p></div>
+      </div>
+
+      <div class="value-item">
+        <div class="value-header" onclick="toggleValue(this)">
+          <span class="value-num">10</span>
+          <span class="value-title">Akcia</span>
+          <svg class="value-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="value-body"><p>Slová nestačia. Chceme viditeľné výsledky – v komunite, v politike, v živote ľudí.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── QUOTE BAND ── -->
+<div class="quote-band">
+  <blockquote>"Mladosť nie je len vek – je to odvaha myslieť inak a konať zodpovedne."</blockquote>
+  <cite>— Mladý HLAS</cite>
+</div>
+
+<!-- ── GOALS ── -->
+<section id="ciele">
+  <div class="container">
+    <span class="section-label">Ciele</span>
+    <h2>Na čom<br>pracujeme</h2>
+
+    <div class="goals-grid">
+      <div class="goal-card">
+        <div class="g-num">01</div>
+        <h3>Zapojenie mladých do politiky</h3>
+        <p>Chceme, aby mladí ľudia mali reálny hlas v rozhodnutiach, ktoré ovplyvňujú ich budúcnosť.</p>
+      </div>
+      <div class="goal-card">
+        <div class="g-num">02</div>
+        <h3>Vzdelávanie a diskusia</h3>
+        <p>Organizujeme podujatia, debaty a workshopy, kde môžeš rozvíjať svoje názory a schopnosti.</p>
+      </div>
+      <div class="goal-card">
+        <div class="g-num">03</div>
+        <h3>Komunita a sieť kontaktov</h3>
+        <p>Budujeme priestor, kde nájdeš rovesníkov s podobnými hodnotami naprieč celým Slovenskom.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TEAM ── -->
+<section id="tim">
+  <div class="container">
+    <span class="section-label">Tím</span>
+    <h2>Kto sme</h2>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="images/monika.jpg" alt="Monika Ivanusyková" loading="lazy">
+        <div class="team-info">
+          <div class="team-name">Monika Ivanusyková</div>
+          <div class="team-role">Predsedníčka</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="images/lujza.jpg" alt="Lujza Viežbová" loading="lazy">
+        <div class="team-info">
+          <div class="team-name">Lujza Viežbová</div>
+          <div class="team-role">Podpredsedníčka</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="images/samuel.jpg" alt="Samuel Maťáš" loading="lazy">
+        <div class="team-info">
+          <div class="team-name">Samuel Maťáš</div>
+          <div class="team-role">Podpredseda</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <img src="images/peter-s.jpg" alt="Peter Sokol" loading="lazy">
+        <div class="team-info">
+          <div class="team-name">Peter Sokol</div>
+          <div class="team-role">Podpredseda</div>
+        </div>
+      </div>
+      <div class="team-card" style="grid-column: span 2; max-width: 50%; margin: 0 auto; width: 100%;">
+        <img src="images/peter-k.jpg" alt="Peter Kucharčík" loading="lazy">
+        <div class="team-info">
+          <div class="team-name">Peter Kucharčík</div>
+          <div class="team-role">Podpredseda</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ACTIVITIES ── -->
+<section id="nase-aktivity">
+  <div class="container">
+    <span class="section-label">Aktivity</span>
+    <h2>Čo sme<br>zažili</h2>
+
+    <div class="photo-grid">
+      <img src="images/gallery-sefovia.jpg" alt="Aktivita" loading="lazy" class="wide">
+      <img src="images/gallery-predsednictvo.jpg" alt="Predsedníctvo" loading="lazy">
+      <img src="images/gallery-aktivita1.jpg" alt="Aktivita" loading="lazy">
+      <img src="images/gallery-flower.jpg" alt="Aktivita" loading="lazy">
+      <img src="images/gallery-aktivita2.jpg" alt="Aktivita" loading="lazy">
+      <img src="images/gallery1-4.jpg" alt="Aktivita" loading="lazy" class="wide">
+    </div>
+
+    <a href="https://www.instagram.com/mlady_hlas/" target="_blank" rel="noopener" class="instagram-link">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Viac na @mlady_hlas
+    </a>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="kontakt">
+  <div class="container">
+    <span class="section-label">Kontakt</span>
+    <h2>Napíšte<br>nám</h2>
+
+    <div class="contact-block">
+      <h3>Spojte sa s nami</h3>
+      <div class="sub">Kontaktné informácie</div>
+
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:mladyhlas@strana-hlas.sk">mladyhlas@strana-hlas.sk</a>
+      </div>
+      <div class="contact-row">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="2 12 7 12"/><polyline points="17 12 22 12"/><polyline points="12 2 12 7"/><polyline points="12 17 12 22"/></svg>
+        <a href="https://www.strana-hlas.sk" target="_blank" rel="noopener">strana-hlas.sk</a>
+      </div>
+
+      <div class="social-row">
+        <a href="https://www.instagram.com/mlady_hlas/" target="_blank" rel="noopener" class="social-btn">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          Instagram
+        </a>
+        <a href="https://www.facebook.com/mlady.hlas" target="_blank" rel="noopener" class="social-btn">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          Facebook
+        </a>
+      </div>
+    </div>
+
+    <!-- MEMBERSHIP -->
+    <div class="contact-block" id="stan-sa-clenom">
+      <h3>Staň sa členom</h3>
+      <div class="sub">Mládežnícka organizácia HLAS</div>
+      <p style="font-size:0.87rem;color:var(--muted);margin-bottom:4px;">Sme priestorom pre mladú generáciu, ktorá verí, že politika má slúžiť ľuďom.</p>
+      <p style="font-size:0.87rem;color:var(--muted);margin-bottom:8px;">Chceš sa zapojiť? Je to jednoduché:</p>
+      <ol class="member-steps">
+        <li>Stiahni a vyplň prihlášku nižšie</li>
+        <li>Pošli ju na <strong style="color:#fff">mladyhlas@strana-hlas.sk</strong></li>
+        <li>My sa ti ozveme</li>
+      </ol>
+      <a href="ziadost.pdf" download class="btn-primary" style="margin-bottom:10px;">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Stiahnuť prihlášku
+      </a>
+      <a href="mailto:mladyhlas@strana-hlas.sk?subject=Prihláška za riadneho člena" class="btn-secondary" style="display:flex;align-items:center;justify-content:center;">
+        Odoslať emailom →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <img src="images/logo.png" alt="Mladý HLAS">
+  <p>Mladý HLAS – mládežnícka organizácia <a href="https://www.strana-hlas.sk" target="_blank" rel="noopener">HLAS – sociálna demokracia</a></p>
+  <p>Trnavská cesta 3273/37, 831 04 Bratislava – Nové Mesto<br><a href="mailto:mladyhlas@strana-hlas.sk">mladyhlas@strana-hlas.sk</a></p>
+  <a href="stanovy.pdf" target="_blank" rel="noopener" class="footer-stanovy">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    Stanovy organizácie
+  </a>
+  <div class="divider"></div>
+  <p style="font-size:11px">© 2026 Mladý HLAS. Všetky práva vyhradené. &nbsp;·&nbsp; <a href="index.html">Zobraziť plnú verziu</a></p>
+</footer>
+
+<script>
+  /* ── Nav ── */
+  const ham = document.getElementById('hamburger');
+  const nav = document.getElementById('mobileNav');
+
+  ham.addEventListener('click', () => {
+    ham.classList.toggle('open');
+    nav.classList.toggle('open');
+  });
+
+  function closeNav() {
+    ham.classList.remove('open');
+    nav.classList.remove('open');
+  }
+
+  document.addEventListener('click', e => {
+    if (!ham.contains(e.target) && !nav.contains(e.target)) closeNav();
+  });
+
+  /* ── Values accordion ── */
+  function toggleValue(header) {
+    const item = header.closest('.value-item');
+    const isOpen = item.classList.contains('open');
+
+    document.querySelectorAll('.value-item.open').forEach(el => el.classList.remove('open'));
+
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* ── Smooth scroll offset for fixed nav ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 68;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
