@@ -1031,15 +1031,8 @@
             .team-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 40px; }
             .team-grid .team-card:last-child { grid-column: auto; }
 
-            /* Slideshow — show first image only on mobile */
-            .slideshow-wrap { height: auto; }
-            .slideshow-track { overflow-x: hidden; scroll-snap-type: none; height: auto; }
-            .slideshow-slide { height: auto; }
-            .slideshow-slide img { height: auto; aspect-ratio: 3/2; }
-            .slideshow-slide:not(:first-child) { display: none; }
-            .slideshow-btn { display: none; }
-            .slideshow-dots { display: none; }
-            .slideshow-counter { display: none; }
+            /* Slideshow height set by JS for reliability */
+            .slideshow-btn { width: 36px; height: 36px; }
 
             /* Contact */
             .contact-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -1669,12 +1662,14 @@
 
     // Set slideshow height explicitly on mobile — avoids all CSS height-inheritance issues
     // in scrollable flex containers across different mobile browsers.
-    // On desktop, clear any inline height so CSS 580px takes effect.
-    // On mobile, height:auto + first-image-only is handled entirely in CSS.
     function fixSlideshowHeight() {
         const wrap = document.getElementById('gallerySlideshow');
         if (!wrap) return;
-        wrap.style.height = '';
+        if (window.innerWidth <= 768) {
+            wrap.style.height = Math.round(wrap.getBoundingClientRect().width * (2 / 3)) + 'px';
+        } else {
+            wrap.style.height = '';
+        }
     }
     fixSlideshowHeight();
     window.addEventListener('resize', fixSlideshowHeight);
