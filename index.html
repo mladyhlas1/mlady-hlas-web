@@ -1031,8 +1031,14 @@
             .team-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 40px; }
             .team-grid .team-card:last-child { grid-column: auto; }
 
-            /* Slideshow height set by JS for reliability */
+            /* Hero title — smaller on tablet/phone */
+            #hero h1 { font-size: clamp(2rem, 8vw, 3.2rem); }
+
+            /* Slideshow — height set explicitly by JS on all levels */
             .slideshow-btn { width: 36px; height: 36px; }
+
+            /* About — padding so badge doesn't overlap text */
+            .about-image-wrap { padding-bottom: 28px; }
 
             /* Contact */
             .contact-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -1660,18 +1666,27 @@
 
     /* ── Gallery slideshow ── */
 
-    // Set slideshow height explicitly on mobile — avoids all CSS height-inheritance issues
-    // in scrollable flex containers across different mobile browsers.
+    // On mobile, height: 100% on children doesn't resolve inside a scrollable flex
+    // container in Chrome/Safari. Fix: set explicit px height on EVERY level.
     function fixSlideshowHeight() {
-        const wrap = document.getElementById('gallerySlideshow');
-        if (!wrap) return;
+        const wrap  = document.getElementById('gallerySlideshow');
+        const track = document.getElementById('slideshowTrack');
+        if (!wrap || !track) return;
         if (window.innerWidth <= 768) {
-            wrap.style.height = Math.round(wrap.getBoundingClientRect().width * (2 / 3)) + 'px';
+            const w = wrap.getBoundingClientRect().width;
+            if (!w) return; // layout not ready yet — resize event will retry
+            const h = Math.round(w * 2 / 3) + 'px';
+            wrap.style.height  = h;
+            track.style.height = h;
+            Array.from(track.children).forEach(slide => slide.style.height = h);
         } else {
-            wrap.style.height = '';
+            wrap.style.height  = '';
+            track.style.height = '';
+            Array.from(track.children).forEach(slide => slide.style.height = '');
         }
     }
-    fixSlideshowHeight();
+    // Use rAF so getBoundingClientRect() fires after first layout paint
+    requestAnimationFrame(fixSlideshowHeight);
     window.addEventListener('resize', fixSlideshowHeight);
 
     let currentSlide = 0;
