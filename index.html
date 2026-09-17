@@ -758,6 +758,12 @@
             display: block;
         }
 
+        /* Portrait-orientation photo: show whole frame instead of cropping */
+        .slideshow-slide.contain img {
+            object-fit: contain;
+            object-position: center;
+        }
+
         .slideshow-btn {
             position: absolute;
             top: 50%;
@@ -1093,9 +1099,6 @@
         }
 
         @media (max-width: 768px) {
-            /* Hide activities section on mobile */
-            #nase-aktivity { display: none; }
-
             /* Nav */
             .nav-links { display: none; }
             .hamburger { display: flex; }
@@ -1587,6 +1590,13 @@
         <h2 class="section-title">Naše aktivity</h2>
         <div class="slideshow-wrap" id="gallerySlideshow">
             <div class="slideshow-track" id="slideshowTrack">
+                <div class="slideshow-slide"><img src="images/gallery-stanok1.jpg" alt="Mladý HLAS – stánok na podujatí"></div>
+                <div class="slideshow-slide"><img src="images/gallery-stanok2.jpg" alt="Mladý HLAS – spoločné foto pri stánku" loading="lazy"></div>
+                <div class="slideshow-slide"><img src="images/gallery-stanok3.jpg" alt="Mladý HLAS – tím pri stánku" loading="lazy"></div>
+                <div class="slideshow-slide contain"><img src="images/gallery-hrad.jpg" alt="Mladý HLAS – kampaň pred Bratislavským hradom" loading="lazy"></div>
+                <div class="slideshow-slide"><img src="images/gallery-pamatnik.jpg" alt="Mladý HLAS – pri pamätníku" loading="lazy"></div>
+                <div class="slideshow-slide"><img src="images/gallery-vedenie.jpg" alt="Mladý HLAS – vedenie organizácie" loading="lazy"></div>
+                <div class="slideshow-slide"><img src="images/gallery-pietny-akt.jpg" alt="Mladý HLAS – pietny akt kladenia vencov" loading="lazy"></div>
                 <div class="slideshow-slide"><img src="images/gallery-sefovia.jpg" alt="Mladý HLAS – šéfovia"></div>
                 <div class="slideshow-slide"><img src="images/gallery-predsednictvo.jpg" alt="Mladý HLAS – predsedníctvo"></div>
                 <div class="slideshow-slide"><img src="images/gallery-aktivita1.jpg" alt="Mladý HLAS – aktivita"></div>
@@ -1621,8 +1631,15 @@
                 <button class="slideshow-dot" onclick="goToSlide(9)"></button>
                 <button class="slideshow-dot" onclick="goToSlide(10)"></button>
                 <button class="slideshow-dot" onclick="goToSlide(11)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(12)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(13)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(14)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(15)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(16)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(17)"></button>
+                <button class="slideshow-dot" onclick="goToSlide(18)"></button>
             </div>
-            <div class="slideshow-counter" id="slideshowCounter">1 / 12</div>
+            <div class="slideshow-counter" id="slideshowCounter">1 / 19</div>
         </div>
     </div>
 </section>
@@ -1801,7 +1818,7 @@
     window.addEventListener('resize', fixSlideshowHeight);
 
     let currentSlide = 0;
-    const totalSlides = 12;
+    const totalSlides = 19;
     const track = document.getElementById('slideshowTrack');
     const dots  = document.querySelectorAll('.slideshow-dot');
     const counter = document.getElementById('slideshowCounter');
