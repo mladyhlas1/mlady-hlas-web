@@ -758,10 +758,27 @@
             display: block;
         }
 
-        /* Portrait-orientation photo: show whole frame instead of cropping */
+        /* Portrait-orientation photo: whole frame on top of a blurred,
+           zoomed copy of itself, so the sides are filled instead of black.
+           The slide sets --bg to its own image URL. */
+        .slideshow-slide.contain { position: relative; }
+
+        .slideshow-slide.contain::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: var(--bg);
+            background-size: cover;
+            background-position: center;
+            filter: blur(26px) brightness(0.72) saturate(1.1);
+            transform: scale(1.18);
+        }
+
         .slideshow-slide.contain img {
             object-fit: contain;
             object-position: center;
+            position: relative;
+            z-index: 1;
         }
 
         .slideshow-btn {
@@ -1599,7 +1616,7 @@
                 <div class="slideshow-slide"><img src="images/gallery-stanok1.jpg" alt="Mladý HLAS – stánok na podujatí"></div>
                 <div class="slideshow-slide"><img src="images/gallery-stanok2.jpg" alt="Mladý HLAS – spoločné foto pri stánku" loading="lazy"></div>
                 <div class="slideshow-slide"><img src="images/gallery-stanok3.jpg" alt="Mladý HLAS – tím pri stánku" loading="lazy"></div>
-                <div class="slideshow-slide contain"><img src="images/gallery-hrad.jpg" alt="Mladý HLAS – kampaň pred Bratislavským hradom" loading="lazy"></div>
+                <div class="slideshow-slide contain" style="--bg:url('images/gallery-hrad.jpg')"><img src="images/gallery-hrad.jpg" alt="Mladý HLAS – kampaň pred Bratislavským hradom" loading="lazy"></div>
                 <div class="slideshow-slide"><img src="images/gallery-pamatnik.jpg" alt="Mladý HLAS – pri pamätníku" loading="lazy"></div>
                 <div class="slideshow-slide"><img src="images/gallery-vedenie.jpg" alt="Mladý HLAS – vedenie organizácie" loading="lazy"></div>
                 <div class="slideshow-slide"><img src="images/gallery-pietny-akt.jpg" alt="Mladý HLAS – pietny akt kladenia vencov" loading="lazy"></div>
