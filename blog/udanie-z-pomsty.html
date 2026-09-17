@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Prvý prípad Okresného ľudového súdu v Modrom Kameni: proces s Jánom Ďuriancom, ktorý v januári 1945 udal Nemcom svojho spolubývajúceho a štyroch ukrývaných Židov.">
+    <title>Udanie z pomsty: Proces s Jánom Ďuriancom – Mladý HLAS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ── RESET & BASE ─────────────────────────────── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --red:        #CC1A25;
+            --red-dark:   #A5141D;
+            --red-light:  #E53935;
+            --dark:       #1A1A1A;
+            --dark-2:     #2D2D2D;
+            --gray:       #666666;
+            --light-gray: #F5F5F5;
+            --white:      #FFFFFF;
+            --ease:       0.3s ease;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-weight: 800; line-height: 1.1; }
+        p { line-height: 1.7; color: var(--gray); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        .section-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 14px;
+        }
+
+        /* ── NAVIGATION ───────────────────────────────── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 200;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.07);
+            transition: box-shadow var(--ease);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo img { height: 38px; width: auto; display: block; }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: var(--dark);
+            transition: color var(--ease);
+        }
+
+        .nav-links a:hover { color: var(--red); }
+        .nav-links a.current { color: var(--red); }
+
+        .nav-cta {
+            background: var(--red) !important;
+            color: #fff !important;
+            padding: 10px 22px;
+            border-radius: 4px;
+        }
+
+        .nav-cta:hover { background: var(--red-dark) !important; }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--dark);
+            border-radius: 2px;
+            transition: var(--ease);
+        }
+
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* Mobile nav */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 70px; left: 0; right: 0;
+            background: white;
+            padding: 8px 24px 24px;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            z-index: 199;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+        }
+
+        .mobile-nav.open { display: block; }
+
+        .mobile-nav a {
+            display: block;
+            padding: 15px 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--dark);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            transition: color var(--ease);
+        }
+
+        .mobile-nav a:hover { color: var(--red); }
+        .mobile-nav a.accent { color: var(--red); border-bottom: none; }
+
+        /* ── ARTICLE HEADER ───────────────────────────── */
+        .article-head {
+            background: var(--light-gray);
+            padding: 140px 0 56px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .article-head .container { max-width: 820px; }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--gray);
+            text-decoration: none;
+            margin-bottom: 28px;
+            transition: color var(--ease);
+        }
+
+        .back-link:hover { color: var(--red); }
+
+        .article-title {
+            font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+            color: var(--dark);
+            margin-bottom: 22px;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--gray);
+        }
+
+        .article-meta .dot {
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            background: var(--red);
+        }
+
+        /* ── ARTICLE BODY ─────────────────────────────── */
+        .article-body {
+            padding: 64px 0 90px;
+        }
+
+        .article-body .container { max-width: 760px; }
+
+        .article-body .lead {
+            font-size: 1.1rem;
+            color: var(--dark-2);
+            line-height: 1.75;
+            padding-left: 22px;
+            border-left: 3px solid var(--red);
+        }
+
+        .article-body h2 {
+            font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+            color: var(--dark);
+            margin: 52px 0 18px;
+        }
+
+        .article-body p + p { margin-top: 20px; }
+
+        .article-body p {
+            font-size: 1rem;
+            color: var(--gray);
+            line-height: 1.85;
+        }
+
+        .article-source {
+            margin-top: 56px;
+            padding: 22px 24px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--gray);
+        }
+
+        .article-foot {
+            margin-top: 56px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            background: var(--red);
+            color: #fff;
+            padding: 13px 26px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-decoration: none;
+            transition: background var(--ease);
+        }
+
+        .btn-back:hover { background: var(--red-dark); }
+
+        /* ── FOOTER ───────────────────────────────────── */
+        footer {
+            background: #0a0a0a;
+            padding: 48px 24px 32px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        footer img { height: 30px; margin-bottom: 20px; opacity: 0.85; }
+
+        footer p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.28);
+            line-height: 1.8;
+        }
+
+        footer a { color: rgba(255,255,255,0.45); text-decoration: none; }
+        footer a:hover { color: rgba(255,255,255,0.8); }
+
+        footer .divider {
+            width: 40px; height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 20px auto;
+        }
+
+        /* ── RESPONSIVE ───────────────────────────────── */
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .article-head { padding: 118px 0 44px; }
+            .article-body { padding: 48px 0 70px; }
+        }
+
+        @media (max-width: 520px) {
+            .article-body .lead { font-size: 1.02rem; padding-left: 16px; }
+            .article-foot { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────── -->
+<nav id="nav">
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo"><img src="../images/logo.png" alt="Mladý HLAS"></a>
+        <ul class="nav-links">
+            <li><a href="../index.html#o-nas">O nás</a></li>
+            <li><a href="../index.html#hodnoty">Hodnoty</a></li>
+            <li><a href="../index.html#ciele">Ciele</a></li>
+            <li><a href="../index.html#tim">Tím</a></li>
+            <li><a href="../index.html#clanky" class="current">Články</a></li>
+            <li><a href="../index.html#kontakt">Kontakt</a></li>
+            <li><a href="../stanovy.pdf" target="_blank" rel="noopener">Stanovy</a></li>
+            <li><a href="../index.html#stan-sa-clenom" class="nav-cta">Zapoj sa</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Otvoriť menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+    <a href="../index.html#o-nas"   onclick="closeMobile()">O nás</a>
+    <a href="../index.html#hodnoty" onclick="closeMobile()">Hodnoty</a>
+    <a href="../index.html#ciele"   onclick="closeMobile()">Ciele</a>
+    <a href="../index.html#tim"     onclick="closeMobile()">Tím</a>
+    <a href="../index.html#clanky"  onclick="closeMobile()">Články</a>
+    <a href="../index.html#kontakt" onclick="closeMobile()">Kontakt</a>
+    <a href="../stanovy.pdf" target="_blank" rel="noopener" onclick="closeMobile()">Stanovy</a>
+    <a href="../index.html#stan-sa-clenom" class="accent" onclick="closeMobile()">Zapoj sa →</a>
+</div>
+
+<!-- ── ARTICLE HEADER ──────────────────────────────── -->
+<header class="article-head">
+    <div class="container">
+        <a href="../index.html#clanky" class="back-link">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            Späť na články
+        </a>
+        <span class="section-label">Články</span>
+        <h1 class="article-title">Udanie z pomsty: Proces s Jánom Ďuriancom pred Okresným ľudovým súdom v Modrom Kameni</h1>
+        <div class="article-meta">
+            <span>Ivan Nociar</span>
+            <span class="dot"></span>
+            <span>Mladý HLAS</span>
+        </div>
+    </div>
+</header>
+
+<!-- ── ARTICLE BODY ────────────────────────────────── -->
+<article class="article-body">
+    <div class="container">
+
+        <p class="lead">Po ukončení 2. svetovej vojny vznikli na území Slovenska retribučné ľudové súdy, ktoré súdili osoby previnivšie sa nariadeniam reitribučného zákona č. 33/1945 Zbierky nariadení Slovenskej národnej rady. V praxi súdili vysokých predstaviteľov Slovenského štátu, kolaborantov, udavačov a iných. Na základe retribučného nariadenia vznikli retribučné Okresné ľudové súdy v sídlach okresov. Takýto okresný ľudový súd vznikol v Modrom Kameni. Súd v Modrom Kameni svoj prvý prípad prerokoval 14. augusta 1945 a išlo o proces s Jánom Ďuriancom.</p>
+
+        <h2>Kto to bol Ján Ďurianec?</h2>
+
+        <p>Ján Ďurianec – Jánošík bol v 40. rokoch 20. storočia postarším pánom, roľníkom, ktorý takmer celý svoj život prežil v Dolnom Tisovníku, maličkej obci, nachádzajúcej sa v dnešnom okrese Veľký Krtíš. Ďurianec bol politicky činný. V roku 1921 vstúpil do komunistickej strany, členom ktorej bol do roku 1925. Vtedy vstúpil do agrárnej strany, v ktorej zotrval až do roku 1938. V roku 1940 vstúpil do Hlinkovej slovenskej ľudovej strany. V nej zostal až po jej zánik a v máji 1945, spolu s ďalšou osobou, založil miestnu organizáciu Komunistickej strany Slovenska v Dolnom Tisovníku. Možno si myslel, že sa zabudne na jeho skutok, ktorého sa dopustil v januári 1945, avšak mýlil sa. O jeho skutku sa dopočula stanica Národnej bezpečnosti v Turom Poli, ktorá 30. mája 1945 o ňom oboznámila okresného veliteľa II. oddelenia Národnej bezpečnosti v Modrom Kameni Jána Zverka. Zverko následne 2. júna 1945 zatkol Jána Ďurianca a uväznil ho v Modrom Kameni.</p>
+
+        <h2>Hlavné pojednávanie</h2>
+
+        <p>Hlavné pojednávanie pred Okresným ľudovým súdom v Modrom Kameni sa začalo 14. augusta 1945 o 10:00, kedy ho otvoril predseda senátu Július Albrecht. Po jeho otvorení si Ďurianec vypočul z úst obžalobcu Jána Vevurku žalobu, podľa ktorej „dňa 21. januára 1945 Ďurianec oznámil na miestnom nemeckom vojenskom veliteľstve v Dolnom Tisovníku (Ortskommande) Emila Václavíka, svojho spolubývajúceho, že ukrýva 4 osoby židovského pôvodu a sám Václavík, že ukrýva vojenskú výzbroj a výstroj, ktorú si Václavík doniesol domov, ako vojak Slovenského národného povstania.“ Následne išiel Ďurianec, spolu so starostom obce a nemeckými vojakmi do Václavíkovho bytu, kde našli štyri osoby židovského pôvodu a povstaleckú výstroj. Potom nemeckí vojaci odvliekli Václavíka spolu so štyrmi Židmi na neznáme miesto, kde ich pravdepodobne zavraždili. Týmto skutkom sa Ďurianec mal dopustiť činu trestného podľa štvrtého paragrafu retribučného nariadenia, teda zrady na Povstaní, za ktorú mu hrozil trest smrti.</p>
+
+        <p>Ďurianec poprel svoju vinu a pristavil sa pri vzťahu medzi ním a Emilom Václavíkom. V roku 1942/1943 Ďurianec podpísal s Václavíkom zmluvu s tým, že Václavíkovi za 82 000 korún predal svoj dom a pole s tým, že Ďurianca a jeho manželku doopatruje až do ich smrti a v ich užívaní im ponechal časť domu a poľa. Avšak, medzi Václavíkom a Ďuriancom boli neustále hádky, ktoré vyvrcholili podaním civilnej žaloby a niekoľkomesačným pobytom Ďuriancovcov u ich suseda Jána Bubliša od júna 1944. Neskôr sa Ďuriancovci vrátili do svojho domu a zistili, že Emil Václavík od konca októbra 1944 ukrýval na svojej povale, v sene, štyroch cudzincov, o ktorých sa v obci hovorilo, že boli židovského pôvodu. Ďurianec im odporučil, aby sa ukryli na okolitých lazoch, na Budinej, Ábelovej, alebo Madačke, no napriek tomu zostali u Václavíkovcov. V osudný deň, 21. januára 1945, sa Ján Ďurianec s Emilom Václavíkom opäť pohádali, vykrikovali si navzájom, že boli partizánmi, mali u seba v byte ukrytú tajnú vysielačku, ap. Po hádke, okolo 8:00, išiel Ďurianec do domu starostu, kde od Nového roka sídlilo nemecké veliteľstvo, a chcel nemeckým vojakom povedať, že keď Václavík hovoril, že on má pri sebe tajnú vysielačku, Václavík mal ukrytých štyroch cudzincov, pričom Václavíka chcel udať kvôli tomu, že sa bál o svoj život. Vtedy Václavíka neudal a odišiel domov. Druhýkrát prišiel do starostovho domu o 15:00, kedy ho na naliehanie starosta odviedol ku Nemcom, kde udal Václavíka. Potom Nemci išli spolu so starostom a Ďuriancom k Václavíkovmu domu, kde Nemci urobili domovú prehliadku, pri ktorej našli štyroch cudzincov, Židov, a Václavíkovu výzbroj. Následne všetkých päť osôb odviedli ku obecnému sluhovi, kde dané osoby boli dva dni a potom ich Nemci odviedli na neznáme miesto. Na hlavnom pojednávaní Ďurianec svoj čin oľutoval a povedal, „že by Václavíkovi Pán Boh odpustil za moje utrpenie.“</p>
+
+        <p>Celý prípad uviedli na pravú mieru starosta Dolného Tisovníka, Jána Ďurkov, a manželka Václavíka Elena. Elena potvrdila skutočnosť, že 21. januára 1945 sa jej manžel pohádal s Ďuriancom, pričom obaja sa obviňovali, že boli partizánmi. Starosta potvrdil to, že Ďurianec prišiel k nemu v osudný deň dvakrát, raz o 8:00, druhýkrát o 13:00, alebo o 14:00, ale chcel sa správať alibisticky, keď chcel od starostu, aby on nahlásil, že Václavík ukrýva cudzie osoby. Ďurkov s tým nesúhlasil, preto Ďurianec oznámil prípad Nemcom osobne s tým, že uviedol len skutočnosť o štyroch skrývajúcich sa cudzincoch. Ďurianec nielen odviedol Nemcov k svojmu domu, ale otvoril dvere na povale a presne im ukázal, kde sa skrývali štyri Židia, traja muži a jedna žena. Keď Nemci našli prvého Žida, tohto fyzicky napadli. Po nájdení štyroch Židov našli povstaleckú uniformuj, ku ktorej sa neprihlásil žiaden zo Židov, ale Václavík, ktorý, pri neskoršom vyšetrovaní, priniesol Nemcom aj povstaleckú pušku.</p>
+
+        <h2>Rozsudok, výkon trestu a „charakter“ Jána Ďurianca</h2>
+
+        <p>Keďže Ján Ďurianec bol starším pánom, ktorý sa udavačstva dopustil po hádke s Václavíkom a v máji bol spoluzakladateľom Komunistickej strany Slovenska, nebol odsúdený na trest smrti, ako to navrhol Vevurka, ale „len“ na 20 rokov odňatia slobody nepodmienečne ako hlavný trest a desať rokov straty občianskych práv ako vedľajší trest. Tri roky z hlavného trestu si Ďurianec mal odpykať vo väznici, zvyšok trestu v pracovnom tábore.</p>
+
+        <p>Ďurianec bol z väznice v Modrom Kameni eskortovaný najskôr do väznice Krajského súdu v Banskej Bystrici, neskôr do väznici v Leopoldove. Tam sa rozhodol, že sa mu nepáči výška trestu, preto si najprv podal žiadosť o milosť, potom žiadosť o podanie mimoriadneho opravného prostriedku, ako prostriedok odvolania sa voči rozsudku. Obe boli zamietnuté. Ku obom museli relevantné úrady podať svoje odporúčanie, na základe čoho sa môžeme dozvedieť niečo o charakterových vlastnostiach Jána Ďurianca. Po skončení 2. svetovej vojny sa snažil zo svojho majetku vyhnať vdovu Elenu Václavíkovú, spolu s jej deťmi. Ďalej, Ďurianec nepovažoval trest ako následok svojho činu, ale len ako akt „nevraždivosti svojich spoluobyvateľov“. V Dolnom Tisovníku žilo len 200 ľudí a takmer každý z nich by nesúhlasil s eventuálnym prepustením. Napokon, Václavík nebol prvým Ďuriancovým spolubývajúcim. V roku 1939 dom, za tých istých okolností ako Václavík, odkúpil istý Kružliak z Hriňovej, ktorý vyplatil celú dlžobu, viazanú na dome. Za odmenu sa Ďurianec viackrát s ním hádal a chcel ho pripraviť o majetok, až Kružliak prenechal svoj podiel Václavíkovi.</p>
+
+        <h2>Záver</h2>
+
+        <p>V žiadosti o milosť Ján Ďurianec napísal, že sa chcel dostať na slobodu, aby mohol so svojou starou a chorou manželkou „v pokoji stráviť posledné dni“ svojho života. Nie je jasné, či zomrel vo väznici, alebo ho niekoľko mesiacov pred smrťou prepustili domov. Jedno je však isté. Človek, ktorý chcel zvyšok svojej staroby prežiť na slobode, pripravil o život Emila Václavíka, po ktorom ostala jeho manželka-vdova a šesť sirôt, a štyri osoby židovskej národnosti, ktoré sa ukrývali pred beštiálnymi Nemcami, ale doplatili na pomstu jedného staršieho pána.</p>
+
+        <div class="article-source">
+            <strong>Zdroj:</strong> súdny spis z procesu s Jánom Ďuriancom (Štátny archív v Banskej Bystrici, fond Okresný ľudový súd v Modrom Kameni, šk. 3, Tľud 1/45).
+        </div>
+
+        <div class="article-foot">
+            <a href="../index.html#clanky" class="btn-back">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                VŠETKY ČLÁNKY
+            </a>
+            <a href="../index.html#stan-sa-clenom" class="back-link" style="margin:0;">Zapoj sa do Mladého HLASU →</a>
+        </div>
+
+    </div>
+</article>
+
+<!-- ── FOOTER ──────────────────────────────────────── -->
+<footer>
+    <img src="../images/logo.png" alt="Mladý HLAS">
+    <p>Mladý HLAS – mládežnícka organizácia <a href="https://www.strana-hlas.sk" target="_blank" rel="noopener">HLAS – sociálna demokracia</a></p>
+    <p>Trnavská cesta 3273/37, 831 04 Bratislava – Nové Mesto &nbsp;·&nbsp; <a href="mailto:mladyhlas@strana-hlas.sk">mladyhlas@strana-hlas.sk</a></p>
+    <div class="divider"></div>
+    <p style="font-size:12px">© 2026 Mladý HLAS. Všetky práva vyhradené.</p>
+</footer>
+
+<script>
+    /* ── Mobile nav ── */
+    const ham = document.getElementById('hamburger');
+    const mob = document.getElementById('mobileNav');
+
+    ham.addEventListener('click', () => {
+        ham.classList.toggle('open');
+        mob.classList.toggle('open');
+    });
+
+    function closeMobile() {
+        ham.classList.remove('open');
+        mob.classList.remove('open');
+    }
+
+    document.addEventListener('click', e => {
+        if (!ham.contains(e.target) && !mob.contains(e.target)) closeMobile();
+    });
+
+    /* ── Nav shadow on scroll ── */
+    window.addEventListener('scroll', () => {
+        document.getElementById('nav').style.boxShadow =
+            window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.06)' : 'none';
+    });
+</script>
+
+</body>
+</html>

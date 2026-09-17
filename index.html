@@ -982,6 +982,95 @@
             margin: 20px auto;
         }
 
+        /* ── ARTICLES / BLOG ──────────────────────────── */
+        #clanky {
+            padding: 110px 0;
+            background: var(--light-gray);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 26px;
+            margin-top: 52px;
+        }
+
+        .article-card {
+            display: flex;
+            flex-direction: column;
+            background: var(--white);
+            border-radius: 4px;
+            padding: 34px 30px 30px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .article-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--red);
+        }
+
+        .article-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+        }
+
+        .article-card-tag {
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 2.2px;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 14px;
+        }
+
+        .article-card h3 {
+            font-size: 1.12rem;
+            line-height: 1.35;
+            color: var(--dark);
+            margin-bottom: 14px;
+        }
+
+        .article-card p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+
+        .article-card-foot {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(0,0,0,0.07);
+        }
+
+        .article-card-author {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gray);
+        }
+
+        .article-card-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            color: var(--red);
+        }
+
+        .article-card:hover .article-card-more svg { transform: translateX(3px); }
+        .article-card-more svg { transition: transform var(--ease); }
+
         /* ── ANIMATIONS ───────────────────────────────── */
         .fade-up {
             opacity: 0;
@@ -999,6 +1088,7 @@
         @media (max-width: 1024px) {
             .values-grid { grid-template-columns: repeat(3, 1fr); }
             .team-grid { grid-template-columns: repeat(3, 1fr); }
+            .articles-grid { grid-template-columns: repeat(2, 1fr); }
             .team-grid .team-card:last-child { grid-column: 2; }
         }
 
@@ -1011,7 +1101,7 @@
             .hamburger { display: flex; }
 
             /* Section spacing */
-            #o-nas, #hodnoty, #ciele, #tim, #nase-aktivity { padding: 64px 0; }
+            #o-nas, #hodnoty, #ciele, #tim, #nase-aktivity, #clanky { padding: 64px 0; }
             #kontakt { padding: 64px 0; }
 
             /* Hero */
@@ -1032,6 +1122,7 @@
 
             /* Team */
             .team-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 40px; }
+            .articles-grid { grid-template-columns: 1fr; gap: 18px; margin-top: 36px; }
             .team-grid .team-card:last-child { grid-column: auto; }
 
             /* Hero title — smaller on tablet/phone */
@@ -1101,6 +1192,7 @@
             <li><a href="#ciele">Ciele</a></li>
             <li><a href="#tim">Tím</a></li>
             <li><a href="#nase-aktivity">Naše aktivity</a></li>
+            <li><a href="#clanky">Články</a></li>
             <li><a href="#kontakt">Kontakt</a></li>
             <li><a href="stanovy.pdf" target="_blank" rel="noopener">Stanovy</a></li>
             <li><a href="#stan-sa-clenom" class="nav-cta">Zapoj sa</a></li>
@@ -1117,6 +1209,7 @@
     <a href="#ciele"   onclick="closeMobile()">Ciele</a>
     <a href="#tim"     onclick="closeMobile()">Tím</a>
     <a href="#nase-aktivity" onclick="closeMobile()">Naše aktivity</a>
+    <a href="#clanky"  onclick="closeMobile()">Články</a>
     <a href="#kontakt" onclick="closeMobile()">Kontakt</a>
     <a href="stanovy.pdf" target="_blank" rel="noopener" onclick="closeMobile()">Stanovy</a>
     <a href="#stan-sa-clenom" class="accent" onclick="closeMobile()">Zapoj sa →</a>
@@ -1530,6 +1623,30 @@
                 <button class="slideshow-dot" onclick="goToSlide(11)"></button>
             </div>
             <div class="slideshow-counter" id="slideshowCounter">1 / 12</div>
+        </div>
+    </div>
+</section>
+
+<!-- ── ARTICLES ──────────────────────────────────────── -->
+<section id="clanky">
+    <div class="container">
+        <span class="section-label fade-up">Čo píšeme</span>
+        <h2 class="section-title fade-up">Články</h2>
+        <p class="fade-up" style="max-width:620px;">Témy, ktoré nás zaujímajú – história, spoločnosť a politika očami mladých.</p>
+        <div class="articles-grid">
+
+            <a class="article-card fade-up" href="blog/udanie-z-pomsty.html">
+                <div class="article-card-tag">História</div>
+                <h3>Udanie z pomsty: Proces s Jánom Ďuriancom pred Okresným ľudovým súdom v Modrom Kameni</h3>
+                <p>Prvý prípad, ktorý po vojne prerokoval retribučný súd v Modrom Kameni. Susedský spor o dom sa v januári 1945 skončil udaním – a smrťou piatich ľudí.</p>
+                <div class="article-card-foot">
+                    <span class="article-card-author">Ivan Nociar</span>
+                    <span class="article-card-more">ČÍTAŤ
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+                    </span>
+                </div>
+            </a>
+
         </div>
     </div>
 </section>
